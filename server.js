@@ -20,9 +20,9 @@ app.use(routes);
 // but if it were set to true, it would drop and re-create all of the database tables on startup.
 // This is great for when we make changes to the Sequelize models, 
 // as the database would need a way to understand that something has changed.
-sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log('Now listening'));
-});
+// sequelize.sync({ force: false }).then(() => {
+//   app.listen(PORT, () => console.log('Now listening'));
+// });
 
 
 // from aboce, changed the value of the force property to true,
@@ -30,6 +30,6 @@ sequelize.sync({ force: false }).then(() => {
 // By forcing the sync method to true, we will make the tables re-create if there are any association changes.
 
 // turn on connection to database and server
-// sequelize.sync({ force: true }).then(() => {
-//   app.listen(PORT, () => console.log('Now listening'));
-// });
+sequelize.sync({ force: true }).then(() => {
+  app.listen(PORT, () => console.log('Now listening'));
+});
