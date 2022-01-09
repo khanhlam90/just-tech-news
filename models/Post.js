@@ -10,28 +10,30 @@ Post.init(
     // first parameters - define Post schema
     {
         id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true
+          type: DataTypes.INTEGER,
+          allowNull: false,
+          primaryKey: true,
+          autoIncrement: true
         },
         title: {
-            type: DataTypes.STRING,
-            allowNull: false
+          type: DataTypes.STRING,
+          allowNull: false
         },
         post_url: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
+          type: DataTypes.STRING,
+          allowNull: false,
+          validate: {
             isURL: true
-        }
-    },
+          }
+        },
         // this column determines who posted the news article    
         user_id: {
             type: DataTypes.INTEGER,
-            references: { //references property establish the relationship between this post and the user by creating a reference to the User model
+            //references property establish the relationship between this post and the user by creating a reference to the User model
+            references: { 
                 model: 'user',
-                key: 'id' //specifically to the id column that is defined by the key property, which is the primary key
+                //specifically to the id column that is defined by the key property, which is the primary key
+                key: 'id' 
             }
         }
     },
