@@ -1,18 +1,18 @@
 const router = require('express').Router();
-const { User, Post, Vote } = require('../../models');
+const { User, Post, Comment, Vote } = require('../../models');
 
 // GET /api/users
 // js sql SELECT * FROM users;
 router.get('/', (req, res) => {
-    // Access our User model and run .findAll() method)
-    User.findAll({
-      attributes: { exclude: ['password'] }
-    })
-      .then(dbUserData => res.json(dbUserData))
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
+  // Access our User model and run .findAll() method)
+  User.findAll({
+    attributes: { exclude: ['password'] }
+  })
+    .then(dbUserData => res.json(dbUserData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 // GET /api/users/1
@@ -27,6 +27,15 @@ router.get('/:id', (req, res) => {
       {
         model: Post,
         attributes: ['id', 'title', 'post_url', 'created_at']
+      },
+      // include the Comment model here:
+      {
+        model: Comment,
+        attributes: ['id', 'comment_text', 'created_at'],
+        include: {
+          model: Post,
+          attributes: ['title']
+        }
       },
       {
         model: Post,
@@ -100,6 +109,7 @@ router.put('/:id', (req, res) => {
     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
   
     // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
+    // pass in req.body instead to only update what's passed through
     User.update(req.body, {
       individualHooks: true,
       where: {
@@ -117,7 +127,7 @@ router.put('/:id', (req, res) => {
         console.log(err);
         res.status(500).json(err);
       });
-  });
+});
 
 // DELETE /api/users/1
 router.delete('/:id', (req, res) => {
