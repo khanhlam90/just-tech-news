@@ -1,8 +1,9 @@
-const express = require('express');
-const routes = require('./controllers/');
 const path = require('path');
+const express = require('express');
 //  to use express-session and sequelize store; sets up an Express.js session and connects the session to our Sequelize database
 const session = require('express-session');
+
+const routes = require('./controllers/');
 
 const app = express();
 const PORT = process.env.PORT || 3001;

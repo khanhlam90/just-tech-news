@@ -11,30 +11,29 @@
 <body>
   <div class="wrapper">
     <header>
-    <h1>
-      <a href="/">Just Tech News</a>
-    </h1>
-    <!--login logout links 
-    <nav>
-      <button id="logout" class="btn-no-style">logout</button>
-      <a href="/login">login</a>
-    </nav>
-    -->
-    <!-- improve user exp -->
-    <nav>
-      {{#if loggedIn}}
-      <button id="logout" class="btn-no-style">logout</button>
-      {{else}}
-      <a href="/login">login</a>
-      {{/if}}
-    </nav>
-
-  </header>
+      <h1>
+        <a href="/">Just Tech News</a>
+      </h1>
+      <!--login logout links 
+      <nav>
+        <button id="logout" class="btn-no-style">logout</button>
+        <a href="/login">login</a>
+      </nav>
+      -->
+      <!-- improve user exp -->
+      <nav>
+        {{#if loggedIn}}
+        <button id="logout" class="btn-no-style">logout</button>
+        {{else}}
+        <a href="/login">login</a>
+        {{/if}}
+      </nav>
+    </header>
     <main>
-      {{{ body }}}
+        {{{ body }}}
     </main>
     <footer>
-      Thanks for visiting!
+        Thanks for visiting!
     </footer>
   </div>
 

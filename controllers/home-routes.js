@@ -3,7 +3,7 @@ const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Post, User, Comment } = require('../models');
 
-// home page
+// get all posts for homepage
 router.get('/', (req, res) => {
   // to console log the session variables:
   console.log(req.session);
@@ -48,16 +48,6 @@ router.get('/', (req, res) => {
         console.log(err);
         res.status(500).json(err);
       });
-});
-
-// login page
-router.get('/login', (req, res) => {
-    if (req.session.loggedIn) {
-      res.redirect('/');
-      return;
-    }
-  
-    res.render('login');
 });
 
 // for the single post route:
@@ -129,5 +119,14 @@ router.get('/post/:id', (req, res) => {
     });
 });
 
+// login page
+router.get('/login', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('login');
+});
 
 module.exports = router;
