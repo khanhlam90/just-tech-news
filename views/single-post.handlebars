@@ -9,9 +9,11 @@
     |
     <a href="/post/{{post.id}}">{{post.comments.length}} comment(s)</a>
   </div>
-  <!-- to include the form and comments-->
-  <!-- update the hanlebars if helper to make sure only logged-in user can see the form -->
-  {{#if loggedIn}}
+</article>
+
+<!-- to include the form and comments-->
+<!-- update the hanlebars if helper to make sure only logged-in user can see the form -->
+{{#if loggedIn}}
     <form class="comment-form">
       <div>
         <textarea name="comment-body"></textarea>
@@ -22,9 +24,9 @@
         <button type="button" class="upvote-btn">upvote</button>
       </div>
     </form>
-  {{/if}}
+{{/if}}
 
-  <div class="comments">
+<div class="comments">
     {{#each post.comments}}
     <section class="comment">
       <div class="meta">
@@ -35,8 +37,7 @@
       </div>
     </section>
     {{/each}}
-  </div>
-</article>
+</div>
 
 {{#if loggedIn}}
 <script src="/javascript/comment.js"></script>
