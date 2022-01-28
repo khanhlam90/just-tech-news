@@ -7,6 +7,7 @@
 const router = require('express').Router();
 
 const apiRoutes = require('./api');
+
 // added for the new home-routes.js
 const homeRoutes = require('./home-routes.js');
 
