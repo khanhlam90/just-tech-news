@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Comment } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
   Comment.findAll()
@@ -25,7 +26,7 @@ router.get('/', (req, res) => {
 // });
 
 //update the above POST route to ad comment to the single post page
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
   // check the session
   if (req.session) {
     Comment.create({
@@ -43,23 +44,25 @@ router.post('/', (req, res) => {
 });
 
 
-router.delete('/:id', (req, res) => {
-  Comment.destroy({
-    where: {
-      id: req.params.id
-    }
-  })
-    .then(dbCommentData => {
-      if (!dbCommentData) {
-        res.status(404).json({ message: 'No comment found with this id!' });
-        return;
+router.delete('/:id', withAuth, (req, res) => {
+  if (req.session) {
+    Comment.destroy({
+      where: {
+        id: req.params.id
       }
-      res.json(dbCommentData);
     })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+      .then(dbCommentData => {
+        if (!dbCommentData) {
+          res.status(404).json({ message: 'No comment found with this id!' });
+          return;
+        }
+        res.json(dbCommentData);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  }
 });
 
 module.exports = router;

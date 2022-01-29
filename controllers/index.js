@@ -7,12 +7,14 @@
 const router = require('express').Router();
 
 const apiRoutes = require('./api');
+// this is for the dashboard 
+const dashboardRoutes = require('./dashboard-routes.js');
+router.use('/dashboard', dashboardRoutes);
 
 // added for the new home-routes.js
 const homeRoutes = require('./home-routes.js');
 
 router.use('/', homeRoutes);
-
 // end of the above
 
 router.use('/api', apiRoutes);

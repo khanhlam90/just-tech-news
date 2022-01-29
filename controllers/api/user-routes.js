@@ -121,7 +121,6 @@ router.post('/logout', (req, res) => {
   else {
     res.status(404).end();
   }
-
 });
 
 // PUT /api/users/1
